@@ -1,4 +1,4 @@
-package com.gmail.mpylypenko.products;
+package com.gmail.mpylypenko.homeworks.hw21.products;
 
 public class ProductsList {
     private static final String CURRENCY = "EUR";

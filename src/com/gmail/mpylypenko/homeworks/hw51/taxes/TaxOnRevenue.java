@@ -17,12 +17,12 @@ public class TaxOnRevenue {
         if (revenue <= 10_000) {
             result[0] = FIRST_LVL_TAXES;
             result[1] = revenue * (FIRST_LVL_TAXES / 100);
-        } else if (revenue > 10_000 && revenue <= 25_000) {
+        } else if (revenue <= 25_000) {
             result[0] = SECOND_LVL_TAXES;
-            result[1] = revenue * (SECOND_LVL_TAXES / 100);;
+            result[1] = revenue * (SECOND_LVL_TAXES / 100);
         } else {
             result[0] = THIRD_LVL_TAXES;
-            result[1] = revenue * (THIRD_LVL_TAXES / 100);;
+            result[1] = revenue * (THIRD_LVL_TAXES / 100);
         }
         return result;
     }

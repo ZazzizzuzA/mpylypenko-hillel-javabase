@@ -36,7 +36,7 @@ public class SumNumbers {
         System.out.println("-=LOGIC CYCLE 'WHILE'=-");
         int sum = 0;
         int number = 1;
-        while(number <= clientNumber) {
+        while (number <= clientNumber) {
             sum += number;
             System.out.print(number + ") Number is " + number);
             System.out.println(" sum is " + sum);
@@ -55,7 +55,7 @@ public class SumNumbers {
             System.out.print(number + ") Number is " + number);
             System.out.println(" sum is " + sum);
             ++number;
-        } while(number <= clientNumber);
+        } while (number <= clientNumber);
         System.out.println("----------------------------");
         System.out.println("Sum of numbers " + sum);
     }

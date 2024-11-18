@@ -118,11 +118,6 @@ public class IntArrayCreate {
         return array;
     }
 
-//    private static void printInfo(String text, int value) {
-//        System.out.print("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
-//        System.out.println(text + value);
-//    }
-
     private static void printInfo(String text) {
         System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         System.out.println(text);

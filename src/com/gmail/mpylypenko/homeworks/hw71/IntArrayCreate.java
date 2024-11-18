@@ -10,13 +10,27 @@ public class IntArrayCreate {
             printInfo("Can not creates an array with negative length. Bye.");
             return;
         }
-        int[] array = generateArray(new int[arrayLength]);
-        printInfo("We've created for you array with length ", arrayLength);
+        int[] array = generateArray(arrayLength);
 
+        printArray(array);
         calculateAndPrintSumOfNegativeNumbers(array);
         findAndPrintAmountOddAndEvenNumbers(array);
         findAndPrintBiggestAndSmallestNumber(array);
         calculateAndPrintAverageAfterFirstNegativeNumber(array);
+    }
+
+    private static void printArray(int[] array) {
+        System.out.println("We've created for you array with length " + array.length);
+        System.out.print("[");
+        for (int i = 0; i < array.length; i++) {
+            int number = array[i];
+            if (i == array.length - 1) {
+                System.out.printf("%d", number);
+                break;
+            }
+            System.out.printf("%d, ", number);
+        }
+        System.out.println("]");
     }
 
     private static void calculateAndPrintSumOfNegativeNumbers(int[] array) {
@@ -26,7 +40,7 @@ public class IntArrayCreate {
                 sum += element;
             }
         }
-        printInfo("Sum of a negative numbers is ", sum);
+        printInfo("Sum of a negative numbers is " + sum);
     }
 
     private static void findAndPrintAmountOddAndEvenNumbers(int[] array) {
@@ -35,12 +49,25 @@ public class IntArrayCreate {
         for (int element: array) {
             if (element % 2 == 0) {
                 evenAmount += 1;
-                continue;
+            } else {
+                oddAmount += 1;
             }
-            oddAmount += 1;
         }
-        printInfo("Amount of even numbers is ", evenAmount);
-        printInfo("Amount of odd numbers is ", oddAmount);
+        printInfo("Amount of even numbers is " + evenAmount);
+        printInfo("Amount of odd numbers is " + oddAmount);
+
+        /* Resolve using only one variable */
+
+        evenAmount = 0;
+        for (int element: array) {
+            if (element % 2 == 0) {
+                evenAmount += 1;
+            }
+        }
+
+        printInfo("(using one variable) Amount of even numbers is " + evenAmount);
+        printInfo("(using one variable) Amount of odd numbers is " + (array.length - evenAmount));
+
     }
 
     private static void findAndPrintBiggestAndSmallestNumber(int[] array) {
@@ -51,16 +78,14 @@ public class IntArrayCreate {
         for (int i = 0; i < array.length; i++) {
             int element = array[i];
             if (biggestNumber < element) {
-                biggestNumber = element;
                 indexBiggest = i;
             }
             if (smallestNumber > element) {
-                smallestNumber = element;
                 indexSmallest = i;
             }
         }
-        printInfo("Biggest number of array with index " + indexBiggest + " is ", biggestNumber);
-        printInfo("Smallest number of array with index " + indexSmallest + " is ", smallestNumber);
+        printInfo("Biggest number of array with index " + indexBiggest + " is " + array[indexBiggest]);
+        printInfo("Smallest number of array with index " + indexSmallest + " is " + array[indexSmallest]);
     }
 
     private static void calculateAndPrintAverageAfterFirstNegativeNumber(int[] array) {
@@ -79,12 +104,13 @@ public class IntArrayCreate {
             return;
         }
 
-        int average = sum / amount;
+        double average = Math.floor((double) sum / amount * 100) / 100;
 
-        printInfo("Average value after first negative number is ", average);
+        printInfo("Average value after first negative number is " + average);
     }
 
-    private static int[] generateArray(int[] array) {
+    private static int[] generateArray(int arrayLength) {
+        int[] array = new int[arrayLength];
         Random random = new Random();
         for (int i = 0; i < array.length; i++) {
             array[i] = random.nextInt(-100,100);
@@ -92,13 +118,13 @@ public class IntArrayCreate {
         return array;
     }
 
-    private static void printInfo(String text, int value) {
-        System.out.print("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
-        System.out.println(text + value);
-    }
+//    private static void printInfo(String text, int value) {
+//        System.out.print("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+//        System.out.println(text + value);
+//    }
 
     private static void printInfo(String text) {
-        System.out.print("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+        System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         System.out.println(text);
     }
 

@@ -71,16 +71,15 @@ public class IntArrayCreate {
     }
 
     private static void findAndPrintBiggestAndSmallestNumber(int[] array) {
-        int biggestNumber = array[0];
-        int smallestNumber = array[0];
+
         int indexBiggest = 0;
         int indexSmallest = 0;
         for (int i = 0; i < array.length; i++) {
             int element = array[i];
-            if (biggestNumber < element) {
+            if (array[indexBiggest] < element) {
                 indexBiggest = i;
             }
-            if (smallestNumber > element) {
+            if (array[indexSmallest] > element) {
                 indexSmallest = i;
             }
         }

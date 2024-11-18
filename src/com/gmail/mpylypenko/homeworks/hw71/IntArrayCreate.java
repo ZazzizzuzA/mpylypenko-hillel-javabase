@@ -35,7 +35,7 @@ public class IntArrayCreate {
 
     private static void calculateAndPrintSumOfNegativeNumbers(int[] array) {
         int sum = 0;
-        for (int element: array) {
+        for (int element : array) {
             if (element < 0) {
                 sum += element;
             }
@@ -46,7 +46,7 @@ public class IntArrayCreate {
     private static void findAndPrintAmountOddAndEvenNumbers(int[] array) {
         int oddAmount = 0;
         int evenAmount = 0;
-        for (int element: array) {
+        for (int element : array) {
             if (element % 2 == 0) {
                 evenAmount += 1;
             } else {
@@ -59,7 +59,7 @@ public class IntArrayCreate {
         /* Resolve using only one variable */
 
         evenAmount = 0;
-        for (int element: array) {
+        for (int element : array) {
             if (element % 2 == 0) {
                 evenAmount += 1;
             }
@@ -90,7 +90,7 @@ public class IntArrayCreate {
     private static void calculateAndPrintAverageAfterFirstNegativeNumber(int[] array) {
         int sum = 0;
         int amount = 0;
-        for (int element: array) {
+        for (int element : array) {
             if (element >= 0) {
                 continue;
             }
@@ -112,7 +112,7 @@ public class IntArrayCreate {
         int[] array = new int[arrayLength];
         Random random = new Random();
         for (int i = 0; i < array.length; i++) {
-            array[i] = random.nextInt(-100,100);
+            array[i] = random.nextInt(-100, 100);
         }
         return array;
     }

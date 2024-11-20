@@ -5,19 +5,23 @@ import java.util.Scanner;
 
 public class SortAndSearchInArray {
     public static void main(String[] args) {
-        int arrayLength = askClientNumber();
+        int arrayLength = askClientNumber("Please, enter length for your array: ");
         if (arrayLength < 0) {
             printInfo("Can not creates an array with negative length. Bye.");
             return;
         }
-        int[] array = generateArray(arrayLength);
 
+        int[] array = generateArray(arrayLength);
+        System.out.println("We've created for you array with length " + array.length);
+        System.out.print("Origin array: ");
         printArray(array);
-        insertionSort(array);
+        insertionSortAndPrint(array);
+
+        int numberToFind = askClientNumber("Index of which number do you want to get?");
+        binarySearchAndPrint(numberToFind, array);
     }
 
-    public static void insertionSort(int[] array) {
-
+    public static void insertionSortAndPrint(int[] array) {
         for (int i = 1; i < array.length; i++) {
             int key = array[i];
             for (int n = i - 1; n >= 0; n--) {
@@ -26,37 +30,37 @@ public class SortAndSearchInArray {
                     array[n] = key;
                 }
             }
-
-            System.out.print("\nSorted insertion 1: \n[");
-            for (int el: array) {
-                System.out.print(el + ", ");
-            }
-            System.out.print("]");
         }
+        System.out.print("Sorted array by insertion method: ");
+        printArray(array);
+    }
 
-//        int n = array.length;
-//        for (int i = 1; i < n; i++) {
-//            int key = array[i];
-//            int j = i - 1;
-//            while (j >= 0 && array[j] > key) {
-//                // Переміщення елементів, які більше за key, на одну позицію вперед
-//                array[j + 1] = array[j];
-//                j--;
-//            }
-//            // Вставлення key на правильну позицію у відсортованій частині масиву
-//            array[j + 1] = key;
-//
-//            System.out.print("\nSorted insertion 2: \n[");
-//            for (int el: array) {
-//                System.out.print(el + ", ");
-//            }
-//            System.out.print("]");
-//        }
+    private static void binarySearchAndPrint(int value, int[] array) {
+        int leftEdge = 0;
+        int rightEdge = array.length - 1;
+        int indexOfValue = 0;
+        boolean isFound = false;
+        while (leftEdge <= rightEdge) {
+            indexOfValue = leftEdge + (rightEdge - leftEdge) / 2;
+            if (array[indexOfValue] == value) {
+                isFound = true;
+                break;
+            }
+            if (array[indexOfValue] < value) {
+                leftEdge = indexOfValue + 1;
+            } else {
+                rightEdge = indexOfValue - 1;
+            }
+        }
+        if (isFound) {
+            printInfo("Index of your number " + value + " in sorted array is " + indexOfValue + ".");
+        } else {
+            printInfo("Sorry, but your number " + value + " is missing in sorted array.");
+        }
     }
 
     private static void printArray(int[] array) {
-        System.out.println("We've created for you array with length " + array.length);
-        System.out.print("Origin array: \n[");
+        System.out.print("[");
         for (int i = 0; i < array.length; i++) {
             int number = array[i];
             if (i == array.length - 1) {
@@ -77,14 +81,14 @@ public class SortAndSearchInArray {
         return array;
     }
 
-    private static int askClientNumber() {
+    private static int askClientNumber(String text) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please, enter length for your array: ");
+        System.out.println(text);
         return scanner.nextInt();
     }
 
     private static void printInfo(String text) {
-        System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         System.out.println(text);
     }
 }

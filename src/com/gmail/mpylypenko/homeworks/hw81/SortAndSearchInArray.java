@@ -24,11 +24,10 @@ public class SortAndSearchInArray {
     public static void insertionSortAndPrint(int[] array) {
         for (int i = 1; i < array.length; i++) {
             int key = array[i];
-            for (int n = i - 1; n >= 0; n--) {
-                if (array[n] > key) {
-                    array[n + 1] = array[n];
-                    array[n] = key;
-                }
+            int n = i - 1;
+            for (; n >= 0 && array[n] > key; n--) {
+                array[n + 1] = array[n];
+                array[n] = key;
             }
         }
         System.out.print("Sorted array by insertion method: ");
@@ -41,7 +40,7 @@ public class SortAndSearchInArray {
         int indexOfValue = 0;
         boolean isFound = false;
         while (leftEdge <= rightEdge) {
-            indexOfValue = leftEdge + (rightEdge - leftEdge) / 2;
+            indexOfValue = (rightEdge + leftEdge) / 2;
             if (array[indexOfValue] == value) {
                 isFound = true;
                 break;
@@ -63,11 +62,10 @@ public class SortAndSearchInArray {
         System.out.print("[");
         for (int i = 0; i < array.length; i++) {
             int number = array[i];
-            if (i == array.length - 1) {
-                System.out.printf("%d", number);
-                break;
+            System.out.printf("%d", number);
+            if (i < array.length - 1) {
+                System.out.print(", ");
             }
-            System.out.printf("%d, ", number);
         }
         System.out.println("]");
     }

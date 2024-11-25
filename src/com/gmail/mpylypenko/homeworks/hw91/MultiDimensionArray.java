@@ -96,26 +96,41 @@ public class MultiDimensionArray {
             System.out.println("Matrix is not a Magical square.");
             return;
         }
+
         int[] sumValuesOfEachRow = new int[matrix.length];
         int[] sumValuesOfEachColumn = new int[matrix[0].length];
         int[] sumValuesOfEachDiagonals = new int[2];
+        int firstSumForCheck = 0;
 
         for (int i = 0; i < matrix.length; i++) {
-
             for (int j = 0; j < matrix[i].length; j++) {
                 sumValuesOfEachRow[i] += matrix[i][j];
                 sumValuesOfEachColumn[j] += matrix[i][j];
                 if (i == j) {
                     sumValuesOfEachDiagonals[0] += matrix[i][j];
-                } else if (matrix[i].length - 1 - i == j) {
+                }
+                if (matrix[i].length - 1 - i == j) {
                     sumValuesOfEachDiagonals[1] += matrix[i][j];
+                }
+
+                if (j == matrix[i].length - 1 && i == 0) {
+                    firstSumForCheck = sumValuesOfEachRow[i];
+                }
+
+                if (j == matrix[i].length - 1 && i == matrix.length - 1) {
+                    if (sumValuesOfEachRow[i] != firstSumForCheck || sumValuesOfEachColumn[j] != firstSumForCheck || sumValuesOfEachDiagonals[0] != firstSumForCheck || sumValuesOfEachDiagonals[1] != firstSumForCheck) {
+                        System.out.println("Sums of each row is " + Arrays.toString(sumValuesOfEachRow));
+                        System.out.println("Sums of each column is " + Arrays.toString(sumValuesOfEachColumn));
+                        System.out.println("Sums of each diagonals is " + Arrays.toString(sumValuesOfEachDiagonals));
+                        System.out.println("Matrix is not a Magical square.");
+                        return;
+                    }
                 }
             }
         }
-
-
-        System.out.println(Arrays.toString(sumValuesOfEachRow));
-        System.out.println(Arrays.toString(sumValuesOfEachColumn));
-        System.out.println(Arrays.toString(sumValuesOfEachDiagonals));
+        System.out.println("Sums of each row is " + Arrays.toString(sumValuesOfEachRow));
+        System.out.println("Sums of each column is " + Arrays.toString(sumValuesOfEachColumn));
+        System.out.println("Sums of each diagonals is " + Arrays.toString(sumValuesOfEachDiagonals));
+        System.out.println("Matrix is a Magical square.");
     }
 }

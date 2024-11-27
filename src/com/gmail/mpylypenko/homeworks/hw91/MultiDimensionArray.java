@@ -8,12 +8,8 @@ public class MultiDimensionArray {
         int axisX = askClient("Please, enter amount of a rows for matrix: ");
         int axisY = askClient("Please, enter amount of a columns for matrix: ");
         int maxValueOfMatrix = askClient("Please, enter max value for matrix: ");
-        int[][] matrix = {
-                {2, 3, 6},
-                {9, 5, 1},
-                {2, 7, 10}
-        };
-//        int[][] matrix = generateMatrix(axisX, axisY, maxValueOfMatrix);
+
+        int[][] matrix = generateMatrix(axisX, axisY, maxValueOfMatrix);
         printMatrix(matrix);
 
         int sumEvenValues = sumsValuesRowsByType(matrix, 0);
@@ -122,7 +118,6 @@ public class MultiDimensionArray {
                 printInfoWithDivider("Sums of each column is not equal. Expected from all columns: " + firstSum + "; received: " + totalSum / (matrix.length + matrix[i].length));
                 return false;
             }
-
         }
 
         /*Sum values of diagonals cells*/

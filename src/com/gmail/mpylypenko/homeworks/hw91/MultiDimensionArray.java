@@ -1,6 +1,5 @@
 package com.gmail.mpylypenko.homeworks.hw91;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -9,19 +8,32 @@ public class MultiDimensionArray {
         int axisX = askClient("Please, enter amount of a rows for matrix: ");
         int axisY = askClient("Please, enter amount of a columns for matrix: ");
         int maxValueOfMatrix = askClient("Please, enter max value for matrix: ");
-
-        int[][] matrix = generateMatrix(axisX, axisY, maxValueOfMatrix);
+        int[][] matrix = {
+                {2, 3, 6},
+                {9, 5, 1},
+                {2, 7, 10}
+        };
+//        int[][] matrix = generateMatrix(axisX, axisY, maxValueOfMatrix);
         printMatrix(matrix);
 
-        int[] arraySumsEvenAndOddValues = sumsValuesRowsByType(matrix);
+        int sumEvenValues = sumsValuesRowsByType(matrix, 0);
+        int sumOddValues = sumsValuesRowsByType(matrix, 1);
 
-        printInfo("Sum of all values in each even rows is " + arraySumsEvenAndOddValues[0], true);
-        printInfo("Sum of all values in each odd rows is " + arraySumsEvenAndOddValues[1], false);
-        int[] arrayMultipliesEvenAndOddValues = multiplyValuesInColumnsByType(matrix);
-        printInfo("Multiply of all values in each even column is " + arrayMultipliesEvenAndOddValues[0], true);
-        printInfo("Multiply of all values in each odd column is " + arrayMultipliesEvenAndOddValues[1], false);
+        printInfoWithDivider("Sum of all values in each even rows is " + sumEvenValues);
+        printInfo("Sum of all values in each odd rows is " + sumOddValues);
 
-        checkOnMagicMatrixAndPrintResult(matrix);
+        int multiplyEvenValues = multiplyValuesInColumnsByType(matrix, 0);
+        int multiplyOddValues = multiplyValuesInColumnsByType(matrix, 1);
+
+        printInfoWithDivider("Multiply of all values in each even column is " + multiplyEvenValues);
+        printInfo("Multiply of all values in each odd column is " + multiplyOddValues);
+
+        boolean isMagicalSquare = checkOnMagicMatrixAndPrintResult(matrix);
+        if (isMagicalSquare) {
+            printInfo("Matrix is a Magical square.");
+        } else {
+            printInfo("Matrix is not a Magical square.");
+        }
     }
 
     private static int[][] generateMatrix(int axisX, int axisY, int maxValue) {
@@ -43,47 +55,43 @@ public class MultiDimensionArray {
 
     private static void printMatrix(int[][] matrix) {
         System.out.println("Matrix with size " + matrix.length + "x" + matrix[0].length);
-        for (int[] rows : matrix) {
-            for (int columns : rows) {
-                System.out.print(columns + "\t");
+        for (int[] row : matrix) {
+            for (int cell : row) {
+                System.out.print(cell + "\t");
             }
             System.out.println();
         }
     }
 
-    private static int[] sumsValuesRowsByType(int[][] matrix) {
-        int[] arraySumsEvenAndOddValues = new int[2];
-        for (int i = 0; i < matrix.length; i++) {
+    private static int sumsValuesRowsByType(int[][] matrix, int startIndex) {
+        int sum = 0;
+        for (int i = startIndex; i < matrix.length; i += 2) {
             for (int cell : matrix[i]) {
-                arraySumsEvenAndOddValues[i % 2] += cell;
+                sum += cell;
             }
         }
-        return arraySumsEvenAndOddValues;
+        return sum;
     }
 
-    private static int[] multiplyValuesInColumnsByType(int[][] matrix) {
-        int[] multiplyEvenAndOddValuesOfRow = new int[2];
+    private static int multiplyValuesInColumnsByType(int[][] matrix, int startIndex) {
+        int multiply = 0;
         for (int[] row : matrix) {
-            for (int j = 0; j < row.length; j++) {
-                int indexByType = j % 2;
-                if (multiplyEvenAndOddValuesOfRow[indexByType] == 0) {
-                    multiplyEvenAndOddValuesOfRow[indexByType] = row[j];
+            for (int j = startIndex; j < row.length; j += 2) {
+                if (multiply == 0) {
+                    multiply = row[j];
                 } else {
-                    multiplyEvenAndOddValuesOfRow[indexByType] = multiplyEvenAndOddValuesOfRow[indexByType] * row[j];
+                    multiply = multiply * row[j];
                 }
             }
         }
-        return multiplyEvenAndOddValuesOfRow;
+        return multiply;
     }
 
-    private static void checkOnMagicMatrixAndPrintResult(int[][] matrix) {
-        printInfo("", true);
+    private static boolean checkOnMagicMatrixAndPrintResult(int[][] matrix) {
+        printInfoWithDivider("");
         if (matrix.length != matrix[0].length) {
-            printInfo("Matrix is not a Magical square.", false);
-            return;
+            return false;
         }
-
-        /* Second try */
 
         int totalSum = 0;
         int firstSum = 0;
@@ -99,9 +107,8 @@ public class MultiDimensionArray {
                 firstSum = totalSum;
             }
             if (i == matrix.length - 1 && firstSum != totalSum / matrix.length) {
-                printInfo("Sums of each row is not equal. Expected average from all rows: " + firstSum + "; received: " + totalSum / matrix.length, true);
-                printInfo("Matrix is not a Magical square.", false);
-                return;
+                printInfoWithDivider("Sums of each row is not equal. Expected average from all rows: " + firstSum + "; received: " + totalSum / matrix.length);
+                return false;
             }
 
         }
@@ -112,76 +119,32 @@ public class MultiDimensionArray {
                 totalSum += matrix[j][i];
             }
             if (i == matrix.length - 1 && firstSum != totalSum / (matrix.length + matrix[i].length)) {
-                printInfo("Sums of each column is not equal. Expected from all columns: " + firstSum + "; received: " + totalSum / (matrix.length + matrix[i].length), true);
-                printInfo("Matrix is not a Magical square.", false);
-                return;
+                printInfoWithDivider("Sums of each column is not equal. Expected from all columns: " + firstSum + "; received: " + totalSum / (matrix.length + matrix[i].length));
+                return false;
             }
 
         }
 
         /*Sum values of diagonals cells*/
         for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-
-                if (i == j) {
-                    totalSum += matrix[i][j];
-                }
-                if (matrix[i].length - 1 - i == j) {
-                    totalSum += matrix[i][j];
-                }
-            }
+            totalSum += matrix[i][i];
+            totalSum += matrix[matrix.length - 1 - i][i];
             if (i == matrix.length - 1) {
                 if (firstSum != totalSum / (matrix.length + matrix[i].length + 2)) {
-                    printInfo("Sums of each diagonal is not equal. Expected from all diagonals: " + firstSum + "; received: " + totalSum / (matrix.length + matrix[i].length + 2), true);
-                    printInfo("Matrix is not a Magical square.", false);
-                    return;
+                    printInfoWithDivider("Sums of each diagonal is not equal. Expected from all diagonals: " + firstSum + "; received: " + totalSum / (matrix.length + matrix[i].length + 2));
+                    return false;
                 }
             }
         }
-
-        /* First try */
-
-//        int[] sumValuesOfEachRow = new int[matrix.length];
-//        int[] sumValuesOfEachColumn = new int[matrix[0].length];
-//        int[] sumValuesOfEachDiagonals = new int[2];
-//        int firstSumForCheck = 0;
-
-//        for (int i = 0; i < matrix.length; i++) {
-//            for (int j = 0; j < matrix[i].length; j++) {
-//                sumValuesOfEachRow[i] += matrix[i][j];
-//                sumValuesOfEachColumn[j] += matrix[i][j];
-//                if (i == j) {
-//                    sumValuesOfEachDiagonals[0] += matrix[i][j];
-//                }
-//                if (matrix[i].length - 1 - i == j) {
-//                    sumValuesOfEachDiagonals[1] += matrix[i][j];
-//                }
-//
-//                if (j == matrix[i].length - 1 && i == 0) {
-//                    firstSumForCheck = sumValuesOfEachRow[i];
-//                }
-//
-//                if (j == matrix[i].length - 1 && i == matrix.length - 1) {
-//                    if (sumValuesOfEachRow[i] != firstSumForCheck || sumValuesOfEachColumn[j] != firstSumForCheck || sumValuesOfEachDiagonals[0] != firstSumForCheck || sumValuesOfEachDiagonals[1] != firstSumForCheck) {
-//                        printInfo("Sums of each row is " + sumValuesOfEachRow[0], true);
-//                        printInfo("Sums of each column is " + sumValuesOfEachColumn[0], false);
-//                        printInfo("Sums of each diagonals is " + sumValuesOfEachDiagonals[0], false);
-//                        printInfo("Matrix is not a Magical square.", false);
-//                        return;
-//                    }
-//                }
-//            }
-//        }
-//        printInfo("Sums of each row is " + Arrays.toString(sumValuesOfEachRow), true);
-//        printInfo("Sums of each column is " + Arrays.toString(sumValuesOfEachColumn), false);
-//        printInfo("Sums of each diagonals is " + Arrays.toString(sumValuesOfEachDiagonals), false);
-        printInfo("Matrix is a Magical square.", false);
+        return true;
     }
 
-    private static void printInfo(String text, boolean needDivider) {
-        if (needDivider) {
-            System.out.println("<--==========================-->");
-        }
+    private static void printInfoWithDivider(String text) {
+        System.out.println("<--==========================-->");
+        System.out.println(text);
+    }
+
+    private static void printInfo(String text) {
         System.out.println(text);
     }
 }

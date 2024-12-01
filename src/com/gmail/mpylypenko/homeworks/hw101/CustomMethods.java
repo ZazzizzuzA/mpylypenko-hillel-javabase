@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class CustomMethods {
     public static void main(String[] args) {
         int integer = askClientEnterInteger("1) Please, enter an integer:");
-        int secondPowInteger = integerInSecondPow(integer);
+        int secondPowInteger = squareNumber(integer);
         System.out.println("Your integer in a second power is " + secondPowInteger);
 
         double radius = askClientEnterDouble("\n2) Please, enter a radius of cylinder:");
@@ -29,30 +29,32 @@ public class CustomMethods {
 
         int number = askClientEnterInteger("\n5) Please, enter a number:");
         int powerNumber = askClientEnterInteger("And number to power it:");
-        int poweredNumber = powNumber(number, powerNumber);
+        double poweredNumber = powNumber(number, powerNumber);
         System.out.println("Result " + number + "^" + powerNumber + " is " + poweredNumber);
 
         int repeats = askClientEnterInteger("\n6) Please, enter a amount of repeats:");
         String textToRepeat = askClientEnterText("And text to repeat:");
-        printTextWithRepeats(textToRepeat, repeats);
+        print(textToRepeat, repeats);
     }
 
-    private static void printTextWithRepeats(String text, int repeats) {
+    private static void print(String text, int repeats) {
         for (int i = 1; i <= repeats; i++) {
             System.out.println(i + ". " + text);
         }
     }
 
-    private static int powNumber(int number, int powerNumber) {
+    private static double powNumber(int number, int powerNumber) {
         int poweredNumber = number;
-        for (int i = 1; i < powerNumber; i++) {
+        boolean isNegativePower = powerNumber < 0;
+        for (int i = isNegativePower ? powerNumber * -1 : powerNumber; i > 1; i--) {
             poweredNumber = poweredNumber * number;
         }
+        System.out.println(poweredNumber);
         /* or can be used Math.pow(number, powerNumber) */
-        return poweredNumber;
+        return isNegativePower ? (double) 1 / poweredNumber : poweredNumber;
     }
 
-    private static int integerInSecondPow(int integer) {
+    private static int squareNumber(int integer) {
         return integer * integer;
     }
 

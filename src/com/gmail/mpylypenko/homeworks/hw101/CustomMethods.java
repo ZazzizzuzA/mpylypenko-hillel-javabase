@@ -6,35 +6,35 @@ import java.util.Scanner;
 
 public class CustomMethods {
     public static void main(String[] args) {
-//        int integer = askClientEnterInteger("1) Please, enter an integer:");
-//        int secondPowInteger = squareNumber(integer);
-//        System.out.println("Your integer in a second power is " + secondPowInteger);
-//
-//        double radius = askClientEnterDouble("\n2) Please, enter a radius of cylinder:");
-//        double height = askClientEnterDouble("Please, enter a height of cylinder:");
-//        double cylinderVolume = calculateCylinderVolume(radius, height);
-//        System.out.print("Cylinder with radius " + radius + " and height " + height);
-//        System.out.println(" has a volume " + cylinderVolume);
-//
-//        int arrayLength = askClientEnterInteger("\n3) Please, enter a length for array:");
-//        int maxValue = askClientEnterInteger("And max value for array:");
-//        int[] array = generateArray(arrayLength, maxValue);
-//        int sumArrayValues = sumAllArrayValues(array);
-//        System.out.println("Array of numbers:" + Arrays.toString(array));
-//        System.out.print("Sum of array values is " + sumArrayValues);
-//
-//        String text = askClientEnterText("\n4) Please, enter some text:");
-//        String reverseText = reverseText(text);
-//        System.out.println("Reversed text:" + reverseText);
+        int integer = askClientEnterInteger("1) Please, enter an integer:");
+        int secondPowInteger = squareNumber(integer);
+        System.out.println("Your integer in a second power is " + secondPowInteger);
+
+        double radius = askClientEnterDouble("\n2) Please, enter a radius of cylinder:");
+        double height = askClientEnterDouble("Please, enter a height of cylinder:");
+        double cylinderVolume = calculateCylinderVolume(radius, height);
+        System.out.print("Cylinder with radius " + radius + " and height " + height);
+        System.out.println(" has a volume " + cylinderVolume);
+
+        int arrayLength = askClientEnterInteger("\n3) Please, enter a length for array:");
+        int maxValue = askClientEnterInteger("And max value for array:");
+        int[] array = generateArray(arrayLength, maxValue);
+        int sumArrayValues = sumAllArrayValues(array);
+        System.out.println("Array of numbers:" + Arrays.toString(array));
+        System.out.print("Sum of array values is " + sumArrayValues);
+
+        String text = askClientEnterText("\n4) Please, enter some text:");
+        String reverseText = reverseText(text);
+        System.out.println("Reversed text:" + reverseText);
 
         int number = askClientEnterInteger("\n5) Please, enter a number:");
         int powerNumber = askClientEnterInteger("And number to power it:");
         double poweredNumber = powNumber(number, powerNumber);
         System.out.println("Result " + number + "^" + powerNumber + " is " + poweredNumber);
 
-//        int repeats = askClientEnterInteger("\n6) Please, enter a amount of repeats:");
-//        String textToRepeat = askClientEnterText("And text to repeat:");
-//        print(textToRepeat, repeats);
+        int repeats = askClientEnterInteger("\n6) Please, enter a amount of repeats:");
+        String textToRepeat = askClientEnterText("And text to repeat:");
+        print(textToRepeat, repeats);
     }
 
     private static void print(String text, int repeats) {

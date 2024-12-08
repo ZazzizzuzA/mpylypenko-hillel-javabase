@@ -6,28 +6,33 @@ public class CreatePerson {
     public static void main(String[] args) {
         String answerAboutDefaultValues = askClientString("Use default values to create persons? (yes/no)");
         boolean useDefaultValues = answerAboutDefaultValues.indexOf("y") == 0 && answerAboutDefaultValues.length() <= 3;
-        Person person1 = createPerson(useDefaultValues);
-        Person person2 = createPerson(useDefaultValues);
-        Person person3 = createPerson(useDefaultValues);
+
+        Person[] persons = new Person[3];
+        for (int i = 0; i < persons.length; i++) {
+            persons[i] = useDefaultValues ? createDefaultPerson() : createPerson();
+        }
+
         System.out.println("\t-=INFORMATION ABOUT PERSONS=-");
-        print(person1);
-        print(person2);
-        print(person3);
-        System.out.println("\t-=CHANGING PROFESSION FOR PERSON " + person3.name() + "=-");
-        person3.setProfession("Soldier");
+        persons[0].printInfo();
+        persons[1].printInfo();
+        persons[2].printInfo();
+        System.out.println("\t-=CHANGING PROFESSION FOR PERSON " + persons[2].name() + "=-");
+        persons[2].setProfession("Soldier");
         System.out.println("\t-=CHANGED INFORMATION ABOUT PERSON=-");
-        print(person3);
+        persons[2].printInfo();
     }
 
-    private static Person createPerson(boolean useDefaultValues) {
+    private static Person createPerson() {
         System.out.println("\t-=CREATE A NEW PERSON=-");
-        if (useDefaultValues) {
-            return new Person();
-        }
         String name = askClientString("What is name of your character?");
         int age = askClientAge();
         String profession = askClientString("What kind of profession has your character?");
         return new Person(name, age, profession);
+    }
+
+    private static Person createDefaultPerson() {
+        System.out.println("\t-=CREATE A NEW PERSON=-");
+        return new Person();
     }
 
     private static String askClientString(String text) {
@@ -40,11 +45,5 @@ public class CreatePerson {
         Scanner scanner = new Scanner(System.in);
         System.out.println("How old is your character?");
         return scanner.nextInt();
-    }
-
-    private static void print(Person person) {
-        System.out.print("Name: " + person.name());
-        System.out.print("; Age: " + person.age());
-        System.out.println("; Profession: " + person.profession());
     }
 }

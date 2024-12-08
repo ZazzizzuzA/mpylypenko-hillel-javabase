@@ -8,21 +8,21 @@ public class Person {
     private String profession;
 
     Person(String name, int age, String profession) {
-        setName(name);
-        setAge(age);
-        setProfession(profession);
+        this.name = name;
+        this.age = age;
+        this.profession = profession;
     }
 
     Person() {
         String[] names = {"Steve", "Joker", "Joshua", "Maximus", "Freddie", "Roger", "Scot"};
-        int[] ages = {13,65,76,45,3,34,54,72,98,12,54};
+        int[] ages = {13, 65, 76, 45, 3, 34, 54, 72, 98, 12, 54};
         String[] professions = {"Stalker", "Wanderer", "Zookeeper", "Judge", "Farmer", "Writer", "Worker", "Driver"};
         Random random = new Random();
-        int index = random.nextInt(1, names.length);
+        int index = random.nextInt(names.length);
         setName(names[index]);
-        index = random.nextInt(1, names.length);
+        index = random.nextInt(ages.length);
         setAge(ages[index]);
-        index = random.nextInt(1, names.length);
+        index = random.nextInt(professions.length);
         setProfession(professions[index]);
     }
 
@@ -48,5 +48,11 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void printInfo() {
+        System.out.print("Name: " + this.name);
+        System.out.print("; Age: " + this.age);
+        System.out.println("; Profession: " + this.profession);
     }
 }

@@ -13,9 +13,9 @@ public class CreatePerson {
         }
 
         System.out.println("\t-=INFORMATION ABOUT PERSONS=-");
-        persons[0].printInfo();
-        persons[1].printInfo();
-        persons[2].printInfo();
+        for (Person person: persons) {
+            person.printInfo();
+        }
         System.out.println("\t-=CHANGING PROFESSION FOR PERSON " + persons[2].name() + "=-");
         persons[2].setProfession("Soldier");
         System.out.println("\t-=CHANGED INFORMATION ABOUT PERSON=-");

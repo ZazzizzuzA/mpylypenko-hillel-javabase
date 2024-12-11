@@ -11,23 +11,23 @@ public class Transposition {
             System.out.println("Matrix is invalid. Do nothing.");
             return;
         }
-        int[][] transposedMatrix = transposeMatrix(matrix);
+        transposeMatrix(matrix);
         System.out.print("Transposed ");
-        printMatrix(transposedMatrix);
+        printMatrix(matrix);
     }
 
     private static boolean isMatrixValidForTransposition(int[][] matrix) {
         return matrix.length == matrix[0].length;
     }
 
-    private static int[][] transposeMatrix(int[][] matrix) {
-        int[][] transposedMatrix = new int[matrix.length][matrix[0].length];
+    private static void transposeMatrix(int[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                transposedMatrix[i][j] = matrix[j][i];
+            for (int j = i; j < matrix[i].length; j++) {
+                int savedValue = matrix[j][i];
+                matrix[j][i] = matrix[i][j];
+                matrix[i][j] = savedValue;
             }
         }
-        return transposedMatrix;
     }
 
     private static int[][] createMatrix() {

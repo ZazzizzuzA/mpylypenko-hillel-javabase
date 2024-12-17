@@ -4,6 +4,18 @@ import java.util.Scanner;
 
 public class DemoClass {
     public static void main(String[] args) {
+        runWorkerDemo();
+        runDemoCar();
+    }
+
+    private static void runDemoCar() {
+        System.out.println("-=RUN DEMO OF CAR CLASS=-");
+        Car car = new Car();
+        car.start();
+    }
+
+    private static void runWorkerDemo() {
+        System.out.println("-=RUN DEMO OF WORKER CLASS=-");
         String name = askClientString("What is the name of your worker?");
         String position = askClientString("What position does your worker hold??");
         String email = askClientString("What is the email of your worker?");

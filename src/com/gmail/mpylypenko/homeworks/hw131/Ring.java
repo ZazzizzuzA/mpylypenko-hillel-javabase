@@ -14,7 +14,7 @@ public class Ring implements GeometryFigure {
         this.radius = radius;
     }
 
-    public double plane() {
+    public double area() {
         return Math.floor((Math.PI * Math.pow(this.radius, 2)) * 100) / 100;
     }
 

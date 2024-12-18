@@ -26,11 +26,11 @@ public class DemoClass {
         System.out.println("-=CREATING A WORKER=-");
         Worker worker = new Worker(name, position, email, phone, age);
         System.out.println("-=WORKER " + worker.getName() + " IS READY=-");
-        worker.printInfo();
+        System.out.println(worker.toString());
         System.out.println("-=WORKER " + worker.getName() + " GETTING OLDER AND CHANGING HIS JOB=-");
         worker.setAge(worker.getAge() + 1);
         worker.setPosition("musician");
-        worker.printInfo();
+        System.out.println(worker.toString());
     }
 
     private static String readString(String text) {

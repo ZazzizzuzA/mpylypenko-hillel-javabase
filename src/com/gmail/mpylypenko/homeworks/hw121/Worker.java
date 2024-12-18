@@ -55,10 +55,11 @@ public class Worker {
         this.age = age;
     }
 
-    public void printInfo() {
-        System.out.print("Hi! My name is " + this.getName() + ".\n");
-        System.out.print("I am " + this.getAge() + " years old.\n");
-        System.out.print("At work I am holding position " + this.getPosition() + ".\n");
-        System.out.print("You can contact me using my email " + this.getEmail() + " or phone number " + this.getPhone() + ".\n");
+    @Override
+    public String toString() {
+        return "Hi! My name is " + this.getName() + ".\n" +
+                "I am " + this.getAge() + " years old.\n" +
+                "At work I am holding position " + this.getPosition() + ".\n" +
+                "You can contact me using my email " + this.getEmail() + " or phone number " + this.getPhone() + ".\n";
     }
 }

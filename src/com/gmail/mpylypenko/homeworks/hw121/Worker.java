@@ -61,5 +61,4 @@ public class Worker {
         System.out.print("At work I am holding position " + this.getPosition() + ".\n");
         System.out.print("You can contact me using my email " + this.getEmail() + " or phone number " + this.getPhone() + ".\n");
     }
-
 }

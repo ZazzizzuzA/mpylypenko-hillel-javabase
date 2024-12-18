@@ -3,6 +3,8 @@ package com.gmail.mpylypenko.homeworks.hw121;
 import java.util.Scanner;
 
 public class DemoClass {
+    static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         runWorkerDemo();
         runDemoCar();
@@ -16,11 +18,11 @@ public class DemoClass {
 
     private static void runWorkerDemo() {
         System.out.println("-=RUN DEMO OF WORKER CLASS=-");
-        String name = askClientString("What is the name of your worker?");
-        String position = askClientString("What position does your worker hold??");
-        String email = askClientString("What is the email of your worker?");
-        String phone = askClientString("What is the phone of your worker?");
-        int age = askClientAge();
+        String name = readString("What is the name of your worker?");
+        String position = readString("What position does your worker hold??");
+        String email = readString("What is the email of your worker?");
+        String phone = readString("What is the phone of your worker?");
+        int age = readInt();
         System.out.println("-=CREATING A WORKER=-");
         Worker worker = new Worker(name, position, email, phone, age);
         System.out.println("-=WORKER " + worker.getName() + " IS READY=-");
@@ -31,14 +33,12 @@ public class DemoClass {
         worker.printInfo();
     }
 
-    private static String askClientString(String text) {
-        Scanner scanner = new Scanner(System.in);
+    private static String readString(String text) {
         System.out.println(text);
         return scanner.nextLine();
     }
 
-    private static int askClientAge() {
-        Scanner scanner = new Scanner(System.in);
+    private static int readInt() {
         System.out.println("How old is your worker?");
         return scanner.nextInt();
     }

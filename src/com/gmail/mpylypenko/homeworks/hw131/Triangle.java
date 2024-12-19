@@ -8,7 +8,7 @@ public class Triangle implements GeometryFigure {
     public Triangle() {
         Random random = new Random();
         for (int i = 0; i < sides.length; i++) {
-            sides[i] = Math.floor(random.nextDouble(1001) * 100) / 100;
+            sides[i] = Math.floor(random.nextDouble(501) * 100) / 100;
         }
     }
 
@@ -19,7 +19,8 @@ public class Triangle implements GeometryFigure {
     }
 
     public double area() {
-        return Math.floor((this.sides[2] * this.sides[1] / 2) * 100) / 100;
+        double halfPerimeter = (this.sides[0] + this.sides[1] + this.sides[2]) / 2;
+        return Math.floor(Math.sqrt(halfPerimeter * (halfPerimeter - this.sides[0]) * (halfPerimeter - this.sides[1]) * (halfPerimeter - this.sides[2])) * 100) / 100;
     }
 
     public double[] getSidesValues() {

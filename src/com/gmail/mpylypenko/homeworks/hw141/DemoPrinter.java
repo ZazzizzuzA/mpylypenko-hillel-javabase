@@ -6,27 +6,37 @@ public class DemoPrinter {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        PrinterRunner printer = new PrinterRunner();
+        ConsolePrinter printer = new ConsolePrinter();
+        System.out.println("Максимальна кількість повторень програми 10!");
+        for (int i = 0; i < 10; i++) {
 
-        System.out.println("-=VALID MESSAGE=-");
-        String sender = readString("Хто відправник?");
-        String text = readString("Що необхідно надрукувати?");
-        PrinterRunner.Message validMessage = new PrinterRunner.Message(sender, text);
-        printer.print(validMessage);
+            String wantSend = readString("Бажаєте відправити повідомлення?(так/ні)");
+            if (!wantSend.startsWith("т") && wantSend.length() <= 3) {
+                System.out.println("Кінець програми.");
+                return;
+            }
 
-        System.out.println("-=MESSAGE WITHOUT SENDER=-");
-        text = readString("Аноніме, що необхідно надрукувати?");
-        PrinterRunner.Message noSenderMessage = new PrinterRunner.Message(text);
-        printer.print(noSenderMessage);
+            String sender = readString("Хто відправник?");
+            String text = readString("Що необхідно надрукувати?");
 
-        System.out.println("-=MESSAGE WITHOUT SENDER AND TEXT=-");
-        PrinterRunner.Message invalidMessage = new PrinterRunner.Message();
-        printer.print(invalidMessage);
+            ConsolePrinter.Message message = new ConsolePrinter.Message(sender, text);
 
+            printer.print(message);
+
+            if (i == 9) {
+                System.out.println("Вибачте, максимальна кількість повторень 10. Кінець програми.");
+                return;
+            }
+        }
     }
 
     private static String readString(String text) {
         System.out.println(text);
         return scanner.nextLine();
+    }
+
+    private static int readInt(String text) {
+        System.out.println(text);
+        return scanner.nextInt();
     }
 }

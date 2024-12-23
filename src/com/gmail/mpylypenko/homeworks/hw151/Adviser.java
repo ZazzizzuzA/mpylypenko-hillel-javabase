@@ -1,7 +1,6 @@
 package com.gmail.mpylypenko.homeworks.hw151;
 
 public class Adviser implements AdviserInterface {
-    private Day day;
 
     @Override
     public void advise(Day day) {

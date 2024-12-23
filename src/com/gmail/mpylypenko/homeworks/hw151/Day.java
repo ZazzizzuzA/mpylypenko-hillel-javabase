@@ -7,8 +7,7 @@ public enum Day {
     THURSDAY("THURSDAY"),
     FRIDAY("FRIDAY"),
     SATURDAY("SATURDAY"),
-    SUNDAY("SUNDAY"),
-    UNKNOWN("UNKNOWN DAY");
+    SUNDAY("SUNDAY");
 
     private final String currentDay;
 
@@ -18,17 +17,5 @@ public enum Day {
 
     public String getCurrentDay() {
         return this.currentDay;
-    }
-
-    public static String[] getListDays() {
-        return new String[]{
-                MONDAY.getCurrentDay(),
-                TUESDAY.getCurrentDay(),
-                WEDNESDAY.getCurrentDay(),
-                THURSDAY.getCurrentDay(),
-                FRIDAY.getCurrentDay(),
-                SATURDAY.getCurrentDay(),
-                SUNDAY.getCurrentDay()
-        };
     }
 }

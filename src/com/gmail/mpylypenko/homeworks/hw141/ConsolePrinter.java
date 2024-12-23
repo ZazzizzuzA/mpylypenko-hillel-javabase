@@ -13,7 +13,7 @@ public class ConsolePrinter implements Printer {
                     System.out.println(defaultMessage.getText());
                 }
             };
-            anonymousMessage.print(new Message());
+            anonymousMessage.print(message);
             return;
         }
 

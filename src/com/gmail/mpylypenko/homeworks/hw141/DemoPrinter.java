@@ -7,8 +7,9 @@ public class DemoPrinter {
 
     public static void main(String[] args) {
         ConsolePrinter printer = new ConsolePrinter();
-        System.out.println("Максимальна кількість повторень програми 10!");
-        for (int i = 0; i < 10; i++) {
+        int limit = 10;
+        System.out.println("Максимальна кількість повторень програми " + limit + "!");
+        for (int i = 0; i < limit; i++) {
 
             String wantSend = readString("Бажаєте відправити повідомлення?(так/ні)");
             if (!wantSend.startsWith("т") && wantSend.length() <= 3) {
@@ -23,7 +24,7 @@ public class DemoPrinter {
 
             printer.print(message);
 
-            if (i == 9) {
+            if (i == limit - 1) {
                 System.out.println("Вибачте, максимальна кількість повторень 10. Кінець програми.");
                 return;
             }

@@ -6,28 +6,35 @@ public class Calculator extends ReadScanner {
     private double numberFirst;
     private double numberSecond;
     private Operation operation;
-    private boolean stoped = true;
+    private boolean stopped = true;
 
     public Calculator() {
         super();
-        this.stoped = false;
+        this.stopped = false;
         System.out.println("Calculator started and ready to calculate!");
     }
 
     public boolean askNextSample() {
-        if (!this.stoped) {
+        if (!this.stopped) {
             String next = this.readString("Next sample? (Y/n):");
             if (Objects.equals(next, "n") || Objects.equals(next, "N")) {
-                this.setStoped(true);
+                this.setStopped(true);
             }
         } else {
-            this.setStoped(false);
+            this.setStopped(false);
         }
-        return this.stoped;
+        return this.stopped;
     }
 
     public double calculate() {
         return this.calculateSeparateValues();
+    }
+
+    public double calculate(double first, double second, Operation operation) {
+        this.setNumberFirst(first);
+        this.setNumberSecond(second);
+        this.setOperation(operation);
+        return this.selectMethod();
     }
 
     private double calculateSeparateValues() {
@@ -64,6 +71,9 @@ public class Calculator extends ReadScanner {
     }
 
     private double minus() {
+        if (this.numberFirst < 0 && this.numberSecond < 0) {
+            return this.plus();
+        }
         return this.numberFirst - this.numberSecond;
     }
 
@@ -79,11 +89,7 @@ public class Calculator extends ReadScanner {
         this.operation = operation;
     }
 
-    public boolean isStoped() {
-        return this.stoped;
-    }
-
-    public void setStoped(boolean stoped) {
-        this.stoped = stoped;
+    public void setStopped(boolean stopped) {
+        this.stopped = stopped;
     }
 }

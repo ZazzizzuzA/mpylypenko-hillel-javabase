@@ -11,9 +11,9 @@ public class ReadScanner {
         return scanner.nextLine();
     }
 
-    public int readInt(String text) {
+    public double readInt(String text) {
         System.out.println(text);
-        return scanner.nextInt();
+        return scanner.nextDouble();
     }
 
     public int readIntWithVariants(String text, Operation[] variants) {

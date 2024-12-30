@@ -1,80 +1,89 @@
 package com.gmail.mpylypenko.calculator;
 
-import java.util.Arrays;
 import java.util.Objects;
 
-public class Calculator {
-    private double numberFirst = -0.0;
-    private double numberSecond = -0.0;
+public class Calculator extends ReadScanner {
+    private double numberFirst;
+    private double numberSecond;
+    private Operation operation;
+    private boolean stoped = true;
 
     public Calculator() {
+        super();
+        this.stoped = false;
         System.out.println("Calculator started and ready to calculate!");
-        System.out.println("For exit type 'stop'");
     }
 
-    public double calculate (String example) {
-        this.getNumbers(example);
-        double result = this.detectAndUseOperation(example);
-        this.clearValues();
-        return result;
-    }
-
-    private void getNumbers(String example) {
-        String[] splitExample = example.split("[+#\\-*/]");
-        if (splitExample.length > 5) {
-            throw new Error("Invalid sample to calculate. Sample: " + example);
-        }
-
-        for (int i = 0; i < splitExample.length; i++) {
-            if (Objects.equals(splitExample[i], "") && !Objects.equals(splitExample[i + 1], "")) {
-                splitExample[i + 1] = "-" + splitExample[i + 1];
-            };
-            if (!Objects.equals(splitExample[i], "") && this.numberFirst == -0.0) {
-                this.numberFirst = Double.parseDouble(splitExample[i]);
-                continue;
+    public boolean askNextSample() {
+        if (!this.stoped) {
+            String next = this.readString("Next sample? (Y/n):");
+            if (Objects.equals(next, "n") || Objects.equals(next, "N")) {
+                this.setStoped(true);
             }
-            if (!Objects.equals(splitExample[i], "") && this.numberSecond == -0.0) {
-                this.numberSecond = Double.parseDouble(splitExample[i]);
-                break;
-            }
+        } else {
+            this.setStoped(false);
         }
-        System.out.println(this.numberFirst + ", " + this.numberSecond);
+        return this.stoped;
     }
 
-    private double detectAndUseOperation(String example) {
-        if (example.contains("+")) {
-            return this.plus(this.numberFirst, this.numberSecond);
-        }
-        if (example.contains("*")) {
-            return this.multiply(this.numberFirst, this.numberSecond);
-        }
-        if (example.contains("/")) {
-            return this.divide(this.numberFirst, this.numberSecond);
-        }
-        if (example.contains("-")) {
-            return this.minus(this.numberFirst, this.numberSecond);
-        }
-        throw new Error("Invalid sample to calculate. Sample: " + example);
+    public double calculate() {
+        return this.calculateSeparateValues();
     }
 
-    private double plus(double a, double b) {
-        return a + b;
+    private double calculateSeparateValues() {
+        this.setNumberFirst(this.readInt("Write first value:"));
+        this.setNumberSecond(this.readInt("Write second value:"));
+        int indexOperation = this.readIntWithVariants("Choose an operation:", Operation.values());
+        this.selectAndSetOperation(indexOperation);
+        return this.selectMethod();
     }
 
-    private double divide(double a, double b) {
-        return a / b;
+    private void selectAndSetOperation(int index) {
+        this.setOperation(Operation.values()[index - 1]);
     }
 
-    private double multiply(double a, double b) {
-        return a * b;
+    private double selectMethod() {
+        return switch (this.operation) {
+            case PLUS -> this.plus();
+            case MULTIPLY -> this.multiply();
+            case DIVIDE -> this.divide();
+            case MINUS -> this.minus();
+        };
     }
 
-    private double minus(double a, double b) {
-        return a - b;
+    private double plus() {
+        return this.numberFirst + this.numberSecond;
     }
 
-    private void clearValues() {
-        this.numberSecond = 0.0;
-        this.numberFirst = 0.0;
+    private double divide() {
+        return this.numberFirst / this.numberSecond;
+    }
+
+    private double multiply() {
+        return this.numberFirst * this.numberSecond;
+    }
+
+    private double minus() {
+        return this.numberFirst - this.numberSecond;
+    }
+
+    protected void setNumberFirst(double value) {
+        this.numberFirst = value;
+    }
+
+    protected void setNumberSecond(double value) {
+        this.numberSecond = value;
+    }
+
+    protected void setOperation(Operation operation) {
+        this.operation = operation;
+    }
+
+    public boolean isStoped() {
+        return this.stoped;
+    }
+
+    public void setStoped(boolean stoped) {
+        this.stoped = stoped;
     }
 }
